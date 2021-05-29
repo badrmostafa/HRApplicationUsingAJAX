@@ -1,0 +1,21 @@
+﻿@model HRApplicationUsingAJAX.Models.EmployeeQualification
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { @id = "frmAdd" }))
+{
+    @Html.HiddenFor(x => x.ID)
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.Employee.Name)
+        @Html.DropDownListFor(x => x.EmployeeId, ViewData["Employees"] as IEnumerable<SelectListItem>, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Employee.Name)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.Qualification.Name)
+        @Html.DropDownListFor(x => x.QualificationId, ViewData["Qualifications"] as SelectList, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Qualification.Name)
+    </div>
+
+}
+
+

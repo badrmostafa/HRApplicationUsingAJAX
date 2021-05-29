@@ -1,0 +1,136 @@
+﻿@{
+    ViewBag.Title = "Governorate Page";
+}
+<br />
+<br />
+<button class="btn btn-info" onclick="ResetForm()">Add</button>
+<br />
+<br />
+
+<div class="row">
+    <div class="col-md-6" id="governoratesList">
+        @Html.Action("GovernoratesList", "Governorate")
+    </div>
+</div>
+
+<div class="container">
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+
+                <div class="modal-body">
+                    <div id="governoratesData">
+                        @Html.Action("AddOrEdit", "Governorate")
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" onclick="SaveData()">Save</button>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+
+
+@section Scripts{
+
+    <script>
+    function SaveData() {
+            var data = $("#frmAdd").serialize();
+            $.ajax({
+                type:"post",
+                url:"@Url.Action("Save", "Governorate")",
+                data:data,
+                success:function (response) {
+                    $("#governoratesList").html(response);
+                }
+            })
+    }
+
+        function EditGovernorate(id) {
+
+            $.ajax({
+                type: "get",
+                url: "@Url.Action("Edit", "Governorate")",
+                data: { id: id },
+                success: function (response) {
+                    $("#governoratesData").html(response);
+                    $("#myModal").modal();
+                }
+            })
+
+        };
+
+
+        function DeleteGovernorate(id) {
+
+            $.ajax({
+
+                type: "post",
+                url: "@Url.Action("Delete","Governorate")",
+                data: { id: id },
+                success: function (response) {
+                    $("#governoratesList").html(response);
+                }
+
+            });
+
+        };
+
+
+
+
+
+
+
+
+
+
+
+    function ResetForm() {
+        $("#myModal").modal();
+    }
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

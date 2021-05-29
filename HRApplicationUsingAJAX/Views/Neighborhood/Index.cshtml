@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "Neighborhood Page";
+}
+<br />
+<br />
+<button class="btn btn-info" onclick="ResetForm()">Add</button>
+<br />
+<br />
+
+<div class="row">
+    <div class="col-md-6" id="neighborhoodsList">
+        @Html.Action("NeighborhoodList", "Neighborhood")
+    </div>
+</div>
+
+<div class="container">
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+
+                <div class="modal-body">
+                    <div id="neighborhoodsData">
+                        @Html.Action("AddOrEdit", "Neighborhood")
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" onclick="SaveData()">Save</button>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+
+@section Scripts{
+
+    <script>
+    function SaveData() {
+            var data = $("#frmAdd").serialize();
+            $.ajax({
+                type:"post",
+                url:"@Url.Action("Save","Neighborhood")",
+                data:data,
+                success:function (response) {
+                    $("#neighborhoodsList").html(response);
+                }
+            })
+    }
+
+        function EditNeighborhood(id) {
+
+        $.ajax({
+            type:"get",
+            url : "@Url.Action("Edit","Neighborhood")",
+            data: { id: id },
+            success: function (response) {
+                $("#neighborhoodsData").html(response);
+                $("#myModal").modal();
+            }
+
+        });
+    }
+
+        function DeleteNeighborhood(id) {
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("Delete","Neighborhood")",
+                data: { id: id },
+                success: function (response) {
+                    $("#neighborhoodsList").html(response);
+                }
+
+            });
+        }
+
+
+
+
+
+
+
+    function ResetForm() {
+        $("#myModal").modal();
+    }
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

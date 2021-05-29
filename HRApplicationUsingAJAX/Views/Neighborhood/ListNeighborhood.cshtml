@@ -1,0 +1,30 @@
+﻿@model IEnumerable<HRApplicationUsingAJAX.Models.Neighborhood>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Neighborhood
+        </th>
+        <th>
+            Governorate
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Governorate.Name)
+        </td>
+        <td>
+            <button class="btn btn-warning" onclick="EditNeighborhood(@item.ID)">Edit</button><span>|</span>
+            <button class="btn btn-danger" onclick="DeleteNeighborhood(@item.ID)">Delete</button>
+        </td>
+    </tr>
+}
+
+</table>

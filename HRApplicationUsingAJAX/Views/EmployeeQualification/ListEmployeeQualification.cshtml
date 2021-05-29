@@ -1,0 +1,71 @@
+﻿@model IEnumerable<HRApplicationUsingAJAX.Models.EmployeeQualification>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Employee 
+        </th>
+        <th>
+            CareerField 
+        </th>
+        <th>
+            CompanyJob 
+        </th>
+        <th>
+            JobArrangement
+        </th>
+
+        <th>
+            Address
+        </th>
+        <th>
+            Governorate 
+        </th>
+        <th>
+            Neighborhood
+        </th>
+
+        <th>
+            Qualification 
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Employee.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Employee.CareerField.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Employee.CompanyJob.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Employee.CompanyJob.JobArrangement)
+    </td>
+
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Employee.Address)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Employee.Governorate.Name)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Employee.Neighborhood.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Qualification.Name)
+    </td>
+    <td>
+        <button type="button" class="btn btn-warning" onclick="EditEmployee(@item.ID)">Edit</button>|
+        <button type="button" class="btn btn-danger" onclick="DeleteEmployee(@item.ID)">Delete</button>
+    </td>
+</tr>
+}
+
+</table>

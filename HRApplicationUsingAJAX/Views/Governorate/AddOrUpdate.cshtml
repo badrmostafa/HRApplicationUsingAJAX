@@ -1,0 +1,15 @@
+﻿@model HRApplicationUsingAJAX.Models.Governorate
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { @id = "frmAdd" }))
+{
+    @Html.HiddenFor(x => x.ID)
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.Name)
+        @Html.EditorFor(x => x.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Name)
+    </div>
+
+}
+
+
